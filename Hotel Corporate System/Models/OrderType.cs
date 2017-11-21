@@ -4,15 +4,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hotel_Corporate_System.Models
 {
-    public class Bill
+    public class OrderType
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-        public decimal Amount { get; set; }
+        public string Name { get; set; }
 
-        public Guid ClientId { get; set; }
-        public Client Client { get; set; }
+        public Guid SupplyId { get; set; }
+        public Supply Supply { get; set; }
     }
 }
