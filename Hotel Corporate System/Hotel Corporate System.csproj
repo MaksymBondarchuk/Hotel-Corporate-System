@@ -194,6 +194,10 @@
     <Compile Include="Migrations\201711211837272_NewModels.Designer.cs">
       <DependentUpon>201711211837272_NewModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711212033149_RoomDescription.cs" />
+    <Compile Include="Migrations\201711212033149_RoomDescription.Designer.cs">
+      <DependentUpon>201711212033149_RoomDescription.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Bill.cs" />
     <Compile Include="Models\Client.cs" />
@@ -302,6 +306,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711211837272_NewModels.resx">
       <DependentUpon>201711211837272_NewModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711212033149_RoomDescription.resx">
+      <DependentUpon>201711212033149_RoomDescription.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

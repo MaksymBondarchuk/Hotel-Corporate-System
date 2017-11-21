@@ -14,8 +14,9 @@ namespace Hotel_Corporate_System.Models
         public int Beds { get; set; }
         public string Number { get; set; }
         public decimal Cost { get; set; }
-        public Guid FloorId { get; set; }
+        public string Notes { get; set; }
 
+        public Guid FloorId { get; set; }
         public Floor Floor { get; set; }
     }
 }
