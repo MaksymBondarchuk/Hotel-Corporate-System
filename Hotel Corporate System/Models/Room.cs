@@ -12,7 +12,11 @@ namespace Hotel_Corporate_System.Models
 
         public int Class { get; set; }
         public int Beds { get; set; }
+
+        [Required]
         public string Number { get; set; }
+
+        [Required]
         public decimal Cost { get; set; }
         public string Notes { get; set; }
 
