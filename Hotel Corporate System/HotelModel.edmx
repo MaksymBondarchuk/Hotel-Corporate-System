@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Bills">
           <Key>
             <PropertyRef Name="Id" />
@@ -44,12 +44,48 @@
           <Property Name="ClientId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ServiceId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="OccupationId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <EntityType Name="Floors">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Number" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InternalOrders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="OrderTypeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RequestedById" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AssignedToId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Occupations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Salary" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IsFrontOffice" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="SupplyId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="Rooms">
           <Key>
@@ -60,6 +96,7 @@
           <Property Name="Beds" Type="int" Nullable="false" />
           <Property Name="Number" Type="nvarchar(max)" />
           <Property Name="Cost" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar(max)" />
           <Property Name="FloorId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="Services">
@@ -69,6 +106,14 @@
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Supplies">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="QuantityAvailable" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_Bills_dbo_Clients_ClientId">
           <End Role="Clients" Type="Self.Clients" Multiplicity="1">
@@ -140,6 +185,72 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_Employees_dbo_Occupations_OccupationId">
+          <End Role="Occupations" Type="Self.Occupations" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Occupations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="OccupationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_InternalOrders_dbo_Employees_AssignedToId">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="InternalOrders" Type="Self.InternalOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InternalOrders">
+              <PropertyRef Name="AssignedToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_InternalOrders_dbo_Employees_RequestedById">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="InternalOrders" Type="Self.InternalOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InternalOrders">
+              <PropertyRef Name="RequestedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_InternalOrders_dbo_OrderTypes_OrderTypeId">
+          <End Role="OrderTypes" Type="Self.OrderTypes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="InternalOrders" Type="Self.InternalOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InternalOrders">
+              <PropertyRef Name="OrderTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderTypes_dbo_Supplies_SupplyId">
+          <End Role="Supplies" Type="Self.Supplies" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderTypes" Type="Self.OrderTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderTypes">
+              <PropertyRef Name="SupplyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_Rooms_dbo_Floors_FloorId">
           <End Role="Floors" Type="Self.Floors" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -159,9 +270,14 @@
           <EntitySet Name="ClientAccommodations" EntityType="Self.ClientAccommodations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClientServices" EntityType="Self.ClientServices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Floors" EntityType="Self.Floors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InternalOrders" EntityType="Self.InternalOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Occupations" EntityType="Self.Occupations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderTypes" EntityType="Self.OrderTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplies" EntityType="Self.Supplies" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_Bills_dbo_Clients_ClientId" Association="Self.FK_dbo_Bills_dbo_Clients_ClientId">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Bills" EntitySet="Bills" />
@@ -182,24 +298,101 @@
             <End Role="Services" EntitySet="Services" />
             <End Role="ClientServices" EntitySet="ClientServices" />
           </AssociationSet>
+          <AssociationSet Name="FK_dbo_Employees_dbo_Occupations_OccupationId" Association="Self.FK_dbo_Employees_dbo_Occupations_OccupationId">
+            <End Role="Occupations" EntitySet="Occupations" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_InternalOrders_dbo_Employees_AssignedToId" Association="Self.FK_dbo_InternalOrders_dbo_Employees_AssignedToId">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="InternalOrders" EntitySet="InternalOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_InternalOrders_dbo_Employees_RequestedById" Association="Self.FK_dbo_InternalOrders_dbo_Employees_RequestedById">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="InternalOrders" EntitySet="InternalOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_InternalOrders_dbo_OrderTypes_OrderTypeId" Association="Self.FK_dbo_InternalOrders_dbo_OrderTypes_OrderTypeId">
+            <End Role="OrderTypes" EntitySet="OrderTypes" />
+            <End Role="InternalOrders" EntitySet="InternalOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderTypes_dbo_Supplies_SupplyId" Association="Self.FK_dbo_OrderTypes_dbo_Supplies_SupplyId">
+            <End Role="Supplies" EntitySet="Supplies" />
+            <End Role="OrderTypes" EntitySet="OrderTypes" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_Rooms_dbo_Floors_FloorId" Association="Self.FK_dbo_Rooms_dbo_Floors_FloorId">
             <End Role="Floors" EntitySet="Floors" />
             <End Role="Rooms" EntitySet="Rooms" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DesktopLocalhost" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bills" EntityType="HotelModel.Bill" />
+          <EntitySet Name="ClientAccommodations" EntityType="HotelModel.ClientAccommodation" />
+          <EntitySet Name="Clients" EntityType="HotelModel.Client" />
+          <EntitySet Name="ClientServices" EntityType="HotelModel.ClientService" />
+          <EntitySet Name="Employees" EntityType="HotelModel.Employee" />
+          <EntitySet Name="Floors" EntityType="HotelModel.Floor" />
+          <EntitySet Name="InternalOrders" EntityType="HotelModel.InternalOrder" />
+          <EntitySet Name="Occupations" EntityType="HotelModel.Occupation" />
+          <EntitySet Name="OrderTypes" EntityType="HotelModel.OrderType" />
+          <EntitySet Name="Rooms" EntityType="HotelModel.Room" />
+          <EntitySet Name="Services" EntityType="HotelModel.Service" />
+          <EntitySet Name="Supplies" EntityType="HotelModel.Supply" />
+          <AssociationSet Name="FK_dbo_Bills_dbo_Clients_ClientId" Association="HotelModel.FK_dbo_Bills_dbo_Clients_ClientId">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Bill" EntitySet="Bills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ClientAccommodations_dbo_Clients_ClientId" Association="HotelModel.FK_dbo_ClientAccommodations_dbo_Clients_ClientId">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="ClientAccommodation" EntitySet="ClientAccommodations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ClientAccommodations_dbo_Rooms_RoomId" Association="HotelModel.FK_dbo_ClientAccommodations_dbo_Rooms_RoomId">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="ClientAccommodation" EntitySet="ClientAccommodations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ClientServices_dbo_Clients_ClientId" Association="HotelModel.FK_dbo_ClientServices_dbo_Clients_ClientId">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="ClientService" EntitySet="ClientServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ClientServices_dbo_Services_ServiceId" Association="HotelModel.FK_dbo_ClientServices_dbo_Services_ServiceId">
+            <End Role="Service" EntitySet="Services" />
+            <End Role="ClientService" EntitySet="ClientServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Employees_dbo_Occupations_OccupationId" Association="HotelModel.FK_dbo_Employees_dbo_Occupations_OccupationId">
+            <End Role="Occupation" EntitySet="Occupations" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_InternalOrders_dbo_Employees_AssignedToId" Association="HotelModel.FK_dbo_InternalOrders_dbo_Employees_AssignedToId">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="InternalOrder" EntitySet="InternalOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_InternalOrders_dbo_Employees_RequestedById" Association="HotelModel.FK_dbo_InternalOrders_dbo_Employees_RequestedById">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="InternalOrder" EntitySet="InternalOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Rooms_dbo_Floors_FloorId" Association="HotelModel.FK_dbo_Rooms_dbo_Floors_FloorId">
+            <End Role="Floor" EntitySet="Floors" />
+            <End Role="Room" EntitySet="Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_InternalOrders_dbo_OrderTypes_OrderTypeId" Association="HotelModel.FK_dbo_InternalOrders_dbo_OrderTypes_OrderTypeId">
+            <End Role="OrderType" EntitySet="OrderTypes" />
+            <End Role="InternalOrder" EntitySet="InternalOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_OrderTypes_dbo_Supplies_SupplyId" Association="HotelModel.FK_dbo_OrderTypes_dbo_Supplies_SupplyId">
+            <End Role="Supply" EntitySet="Supplies" />
+            <End Role="OrderType" EntitySet="OrderTypes" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Bill">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="ClientId" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_dbo_Bills_dbo_Clients_ClientId" FromRole="Bills" ToRole="Clients" />
+          <NavigationProperty Name="Client" Relationship="HotelModel.FK_dbo_Bills_dbo_Clients_ClientId" FromRole="Bill" ToRole="Client" />
         </EntityType>
         <EntityType Name="ClientAccommodation">
           <Key>
@@ -211,8 +404,8 @@
           <Property Name="End" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ClientId" Type="Guid" Nullable="false" />
           <Property Name="RoomId" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_dbo_ClientAccommodations_dbo_Clients_ClientId" FromRole="ClientAccommodations" ToRole="Clients" />
-          <NavigationProperty Name="Room" Relationship="Self.FK_dbo_ClientAccommodations_dbo_Rooms_RoomId" FromRole="ClientAccommodations" ToRole="Rooms" />
+          <NavigationProperty Name="Client" Relationship="HotelModel.FK_dbo_ClientAccommodations_dbo_Clients_ClientId" FromRole="ClientAccommodation" ToRole="Client" />
+          <NavigationProperty Name="Room" Relationship="HotelModel.FK_dbo_ClientAccommodations_dbo_Rooms_RoomId" FromRole="ClientAccommodation" ToRole="Room" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -222,9 +415,9 @@
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Birth" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsVip" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Bills" Relationship="Self.FK_dbo_Bills_dbo_Clients_ClientId" FromRole="Clients" ToRole="Bills" />
-          <NavigationProperty Name="ClientAccommodations" Relationship="Self.FK_dbo_ClientAccommodations_dbo_Clients_ClientId" FromRole="Clients" ToRole="ClientAccommodations" />
-          <NavigationProperty Name="ClientServices" Relationship="Self.FK_dbo_ClientServices_dbo_Clients_ClientId" FromRole="Clients" ToRole="ClientServices" />
+          <NavigationProperty Name="Bills" Relationship="HotelModel.FK_dbo_Bills_dbo_Clients_ClientId" FromRole="Client" ToRole="Bill" />
+          <NavigationProperty Name="ClientAccommodations" Relationship="HotelModel.FK_dbo_ClientAccommodations_dbo_Clients_ClientId" FromRole="Client" ToRole="ClientAccommodation" />
+          <NavigationProperty Name="ClientServices" Relationship="HotelModel.FK_dbo_ClientServices_dbo_Clients_ClientId" FromRole="Client" ToRole="ClientService" />
         </EntityType>
         <EntityType Name="ClientService">
           <Key>
@@ -233,11 +426,22 @@
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="IsBooking" Type="Boolean" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Cost" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="ClientId" Type="Guid" Nullable="false" />
           <Property Name="ServiceId" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_dbo_ClientServices_dbo_Clients_ClientId" FromRole="ClientServices" ToRole="Clients" />
-          <NavigationProperty Name="Service" Relationship="Self.FK_dbo_ClientServices_dbo_Services_ServiceId" FromRole="ClientServices" ToRole="Services" />
+          <NavigationProperty Name="Client" Relationship="HotelModel.FK_dbo_ClientServices_dbo_Clients_ClientId" FromRole="ClientService" ToRole="Client" />
+          <NavigationProperty Name="Service" Relationship="HotelModel.FK_dbo_ClientServices_dbo_Services_ServiceId" FromRole="ClientService" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OccupationId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Occupation" Relationship="HotelModel.FK_dbo_Employees_dbo_Occupations_OccupationId" FromRole="Employee" ToRole="Occupation" />
+          <NavigationProperty Name="InternalOrders" Relationship="HotelModel.FK_dbo_InternalOrders_dbo_Employees_AssignedToId" FromRole="Employee" ToRole="InternalOrder" />
+          <NavigationProperty Name="InternalOrders1" Relationship="HotelModel.FK_dbo_InternalOrders_dbo_Employees_RequestedById" FromRole="Employee" ToRole="InternalOrder" />
         </EntityType>
         <EntityType Name="Floor">
           <Key>
@@ -245,7 +449,41 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="Number" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Rooms" Relationship="Self.FK_dbo_Rooms_dbo_Floors_FloorId" FromRole="Floors" ToRole="Rooms" />
+          <NavigationProperty Name="Rooms" Relationship="HotelModel.FK_dbo_Rooms_dbo_Floors_FloorId" FromRole="Floor" ToRole="Room" />
+        </EntityType>
+        <EntityType Name="InternalOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OrderTypeId" Type="Guid" Nullable="false" />
+          <Property Name="RequestedById" Type="Guid" Nullable="false" />
+          <Property Name="AssignedToId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="HotelModel.FK_dbo_InternalOrders_dbo_Employees_AssignedToId" FromRole="InternalOrder" ToRole="Employee" />
+          <NavigationProperty Name="Employee1" Relationship="HotelModel.FK_dbo_InternalOrders_dbo_Employees_RequestedById" FromRole="InternalOrder" ToRole="Employee" />
+          <NavigationProperty Name="OrderType" Relationship="HotelModel.FK_dbo_InternalOrders_dbo_OrderTypes_OrderTypeId" FromRole="InternalOrder" ToRole="OrderType" />
+        </EntityType>
+        <EntityType Name="Occupation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Salary" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IsFrontOffice" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="HotelModel.FK_dbo_Employees_dbo_Occupations_OccupationId" FromRole="Occupation" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="OrderType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SupplyId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="InternalOrders" Relationship="HotelModel.FK_dbo_InternalOrders_dbo_OrderTypes_OrderTypeId" FromRole="OrderType" ToRole="InternalOrder" />
+          <NavigationProperty Name="Supply" Relationship="HotelModel.FK_dbo_OrderTypes_dbo_Supplies_SupplyId" FromRole="OrderType" ToRole="Supply" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -255,10 +493,11 @@
           <Property Name="Class" Type="Int32" Nullable="false" />
           <Property Name="Beds" Type="Int32" Nullable="false" />
           <Property Name="Number" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Cost" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="FloorId" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="ClientAccommodations" Relationship="Self.FK_dbo_ClientAccommodations_dbo_Rooms_RoomId" FromRole="Rooms" ToRole="ClientAccommodations" />
-          <NavigationProperty Name="Floor" Relationship="Self.FK_dbo_Rooms_dbo_Floors_FloorId" FromRole="Rooms" ToRole="Floors" />
+          <NavigationProperty Name="ClientAccommodations" Relationship="HotelModel.FK_dbo_ClientAccommodations_dbo_Rooms_RoomId" FromRole="Room" ToRole="ClientAccommodation" />
+          <NavigationProperty Name="Floor" Relationship="HotelModel.FK_dbo_Rooms_dbo_Floors_FloorId" FromRole="Room" ToRole="Floor" />
         </EntityType>
         <EntityType Name="Service">
           <Key>
@@ -266,127 +505,169 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <NavigationProperty Name="ClientServices" Relationship="Self.FK_dbo_ClientServices_dbo_Services_ServiceId" FromRole="Services" ToRole="ClientServices" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="ClientServices" Relationship="HotelModel.FK_dbo_ClientServices_dbo_Services_ServiceId" FromRole="Service" ToRole="ClientService" />
+        </EntityType>
+        <EntityType Name="Supply">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="QuantityAvailable" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OrderTypes" Relationship="HotelModel.FK_dbo_OrderTypes_dbo_Supplies_SupplyId" FromRole="Supply" ToRole="OrderType" />
         </EntityType>
         <Association Name="FK_dbo_Bills_dbo_Clients_ClientId">
-          <End Role="Clients" Type="Self.Client" Multiplicity="1">
+          <End Type="HotelModel.Client" Role="Client" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Bills" Type="Self.Bill" Multiplicity="*" />
+          <End Type="HotelModel.Bill" Role="Bill" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Clients">
+            <Principal Role="Client">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Bills">
+            <Dependent Role="Bill">
               <PropertyRef Name="ClientId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_ClientAccommodations_dbo_Clients_ClientId">
-          <End Role="Clients" Type="Self.Client" Multiplicity="1">
+          <End Type="HotelModel.Client" Role="Client" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="ClientAccommodations" Type="Self.ClientAccommodation" Multiplicity="*" />
+          <End Type="HotelModel.ClientAccommodation" Role="ClientAccommodation" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Clients">
+            <Principal Role="Client">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ClientAccommodations">
+            <Dependent Role="ClientAccommodation">
               <PropertyRef Name="ClientId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_ClientAccommodations_dbo_Rooms_RoomId">
-          <End Role="Rooms" Type="Self.Room" Multiplicity="1">
+          <End Type="HotelModel.Room" Role="Room" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="ClientAccommodations" Type="Self.ClientAccommodation" Multiplicity="*" />
+          <End Type="HotelModel.ClientAccommodation" Role="ClientAccommodation" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Rooms">
+            <Principal Role="Room">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ClientAccommodations">
+            <Dependent Role="ClientAccommodation">
               <PropertyRef Name="RoomId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_ClientServices_dbo_Clients_ClientId">
-          <End Role="Clients" Type="Self.Client" Multiplicity="1">
+          <End Type="HotelModel.Client" Role="Client" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="ClientServices" Type="Self.ClientService" Multiplicity="*" />
+          <End Type="HotelModel.ClientService" Role="ClientService" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Clients">
+            <Principal Role="Client">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ClientServices">
+            <Dependent Role="ClientService">
               <PropertyRef Name="ClientId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_ClientServices_dbo_Services_ServiceId">
-          <End Role="Services" Type="Self.Service" Multiplicity="1">
+          <End Type="HotelModel.Service" Role="Service" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="ClientServices" Type="Self.ClientService" Multiplicity="*" />
+          <End Type="HotelModel.ClientService" Role="ClientService" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Services">
+            <Principal Role="Service">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ClientServices">
+            <Dependent Role="ClientService">
               <PropertyRef Name="ServiceId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Rooms_dbo_Floors_FloorId">
-          <End Role="Floors" Type="Self.Floor" Multiplicity="1">
+        <Association Name="FK_dbo_Employees_dbo_Occupations_OccupationId">
+          <End Type="HotelModel.Occupation" Role="Occupation" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Rooms" Type="Self.Room" Multiplicity="*" />
+          <End Type="HotelModel.Employee" Role="Employee" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Floors">
+            <Principal Role="Occupation">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Rooms">
+            <Dependent Role="Employee">
+              <PropertyRef Name="OccupationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_InternalOrders_dbo_Employees_AssignedToId">
+          <End Type="HotelModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="HotelModel.InternalOrder" Role="InternalOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InternalOrder">
+              <PropertyRef Name="AssignedToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_InternalOrders_dbo_Employees_RequestedById">
+          <End Type="HotelModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="HotelModel.InternalOrder" Role="InternalOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InternalOrder">
+              <PropertyRef Name="RequestedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Rooms_dbo_Floors_FloorId">
+          <End Type="HotelModel.Floor" Role="Floor" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="HotelModel.Room" Role="Room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Floor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Room">
               <PropertyRef Name="FloorId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DesktopLocalhost" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Bills" EntityType="Self.Bill" />
-          <EntitySet Name="ClientAccommodations" EntityType="Self.ClientAccommodation" />
-          <EntitySet Name="Clients" EntityType="Self.Client" />
-          <EntitySet Name="ClientServices" EntityType="Self.ClientService" />
-          <EntitySet Name="Floors" EntityType="Self.Floor" />
-          <EntitySet Name="Rooms" EntityType="Self.Room" />
-          <EntitySet Name="Services" EntityType="Self.Service" />
-          <AssociationSet Name="FK_dbo_Bills_dbo_Clients_ClientId" Association="Self.FK_dbo_Bills_dbo_Clients_ClientId">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="Bills" EntitySet="Bills" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_ClientAccommodations_dbo_Clients_ClientId" Association="Self.FK_dbo_ClientAccommodations_dbo_Clients_ClientId">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="ClientAccommodations" EntitySet="ClientAccommodations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_ClientAccommodations_dbo_Rooms_RoomId" Association="Self.FK_dbo_ClientAccommodations_dbo_Rooms_RoomId">
-            <End Role="Rooms" EntitySet="Rooms" />
-            <End Role="ClientAccommodations" EntitySet="ClientAccommodations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_ClientServices_dbo_Clients_ClientId" Association="Self.FK_dbo_ClientServices_dbo_Clients_ClientId">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="ClientServices" EntitySet="ClientServices" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_ClientServices_dbo_Services_ServiceId" Association="Self.FK_dbo_ClientServices_dbo_Services_ServiceId">
-            <End Role="Services" EntitySet="Services" />
-            <End Role="ClientServices" EntitySet="ClientServices" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Rooms_dbo_Floors_FloorId" Association="Self.FK_dbo_Rooms_dbo_Floors_FloorId">
-            <End Role="Floors" EntitySet="Floors" />
-            <End Role="Rooms" EntitySet="Rooms" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        <Association Name="FK_dbo_InternalOrders_dbo_OrderTypes_OrderTypeId">
+          <End Type="HotelModel.OrderType" Role="OrderType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="HotelModel.InternalOrder" Role="InternalOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InternalOrder">
+              <PropertyRef Name="OrderTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_OrderTypes_dbo_Supplies_SupplyId">
+          <End Type="HotelModel.Supply" Role="Supply" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="HotelModel.OrderType" Role="OrderType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supply">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderType">
+              <PropertyRef Name="SupplyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -395,72 +676,122 @@
           <EntitySetMapping Name="Bills">
             <EntityTypeMapping TypeName="HotelModel.Bill">
               <MappingFragment StoreEntitySet="Bills">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ClientAccommodations">
             <EntityTypeMapping TypeName="HotelModel.ClientAccommodation">
               <MappingFragment StoreEntitySet="ClientAccommodations">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IsBooking" ColumnName="IsBooking" />
-                <ScalarProperty Name="Begin" ColumnName="Begin" />
-                <ScalarProperty Name="End" ColumnName="End" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
                 <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="End" ColumnName="End" />
+                <ScalarProperty Name="Begin" ColumnName="Begin" />
+                <ScalarProperty Name="IsBooking" ColumnName="IsBooking" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="HotelModel.Client">
               <MappingFragment StoreEntitySet="Clients">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Birth" ColumnName="Birth" />
                 <ScalarProperty Name="IsVip" ColumnName="IsVip" />
+                <ScalarProperty Name="Birth" ColumnName="Birth" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ClientServices">
             <EntityTypeMapping TypeName="HotelModel.ClientService">
               <MappingFragment StoreEntitySet="ClientServices">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IsBooking" ColumnName="IsBooking" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
                 <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsBooking" ColumnName="IsBooking" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="HotelModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="OccupationId" ColumnName="OccupationId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Floors">
             <EntityTypeMapping TypeName="HotelModel.Floor">
               <MappingFragment StoreEntitySet="Floors">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InternalOrders">
+            <EntityTypeMapping TypeName="HotelModel.InternalOrder">
+              <MappingFragment StoreEntitySet="InternalOrders">
+                <ScalarProperty Name="AssignedToId" ColumnName="AssignedToId" />
+                <ScalarProperty Name="RequestedById" ColumnName="RequestedById" />
+                <ScalarProperty Name="OrderTypeId" ColumnName="OrderTypeId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Occupations">
+            <EntityTypeMapping TypeName="HotelModel.Occupation">
+              <MappingFragment StoreEntitySet="Occupations">
+                <ScalarProperty Name="IsFrontOffice" ColumnName="IsFrontOffice" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderTypes">
+            <EntityTypeMapping TypeName="HotelModel.OrderType">
+              <MappingFragment StoreEntitySet="OrderTypes">
+                <ScalarProperty Name="SupplyId" ColumnName="SupplyId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Rooms">
             <EntityTypeMapping TypeName="HotelModel.Room">
               <MappingFragment StoreEntitySet="Rooms">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Class" ColumnName="Class" />
-                <ScalarProperty Name="Beds" ColumnName="Beds" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="FloorId" ColumnName="FloorId" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Beds" ColumnName="Beds" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Services">
             <EntityTypeMapping TypeName="HotelModel.Service">
               <MappingFragment StoreEntitySet="Services">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Supplies">
+            <EntityTypeMapping TypeName="HotelModel.Supply">
+              <MappingFragment StoreEntitySet="Supplies">
+                <ScalarProperty Name="QuantityAvailable" ColumnName="QuantityAvailable" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

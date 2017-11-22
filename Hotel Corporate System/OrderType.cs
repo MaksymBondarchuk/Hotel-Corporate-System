@@ -12,24 +12,20 @@ namespace Hotel_Corporate_System
     using System;
     using System.Collections.Generic;
     
-    public partial class Room
+    public partial class OrderType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Room()
+        public OrderType()
         {
-            this.ClientAccommodations = new HashSet<ClientAccommodation>();
+            this.InternalOrders = new HashSet<InternalOrder>();
         }
     
         public System.Guid Id { get; set; }
-        public int Class { get; set; }
-        public int Beds { get; set; }
-        public string Number { get; set; }
-        public decimal Cost { get; set; }
-        public string Notes { get; set; }
-        public System.Guid FloorId { get; set; }
+        public string Name { get; set; }
+        public System.Guid SupplyId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClientAccommodation> ClientAccommodations { get; set; }
-        public virtual Floor Floor { get; set; }
+        public virtual ICollection<InternalOrder> InternalOrders { get; set; }
+        public virtual Supply Supply { get; set; }
     }
 }

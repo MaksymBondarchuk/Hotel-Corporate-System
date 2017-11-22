@@ -29,8 +29,13 @@ namespace Hotel_Corporate_System
         public virtual DbSet<ClientAccommodation> ClientAccommodations { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<ClientService> ClientServices { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Floor> Floors { get; set; }
+        public virtual DbSet<InternalOrder> InternalOrders { get; set; }
+        public virtual DbSet<Occupation> Occupations { get; set; }
+        public virtual DbSet<OrderType> OrderTypes { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<Service> Services { get; set; }
+        public virtual DbSet<Supply> Supplies { get; set; }
     }
 }

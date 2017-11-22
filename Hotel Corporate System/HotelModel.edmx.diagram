@@ -5,19 +5,29 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f6f3b085166c442b8e92046a429039ba" Name="Diagram1" ZoomLevel="82">
-        <EntityTypeShape EntityType="HotelModel.Bill" Width="1.5" PointX="0.875" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="HotelModel.ClientAccommodation" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HotelModel.Client" Width="1.5" PointX="0.875" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HotelModel.ClientService" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HotelModel.Floor" Width="1.5" PointX="1.5" PointY="0.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="HotelModel.Room" Width="1.5" PointX="5.125" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HotelModel.Service" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
-        <AssociationConnector Association="HotelModel.FK_dbo_Bills_dbo_Clients_ClientId" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelModel.FK_dbo_ClientAccommodations_dbo_Clients_ClientId" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelModel.FK_dbo_ClientAccommodations_dbo_Rooms_RoomId" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelModel.FK_dbo_ClientServices_dbo_Clients_ClientId" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelModel.FK_dbo_ClientServices_dbo_Services_ServiceId" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelModel.FK_dbo_Rooms_dbo_Floors_FloorId" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HotelModel.Bill" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HotelModel.ClientAccommodation" Width="1.5" PointX="2.875" PointY="3.125" />
+        <EntityTypeShape EntityType="HotelModel.Client" Width="1.5" PointX="0.75" PointY="4.125" />
+        <EntityTypeShape EntityType="HotelModel.ClientService" Width="1.5" PointX="2.875" PointY="6.375" />
+        <EntityTypeShape EntityType="HotelModel.Employee" Width="1.5" PointX="8" PointY="0.75" />
+        <EntityTypeShape EntityType="HotelModel.Floor" Width="1.5" PointX="2.875" PointY="0.75" />
+        <EntityTypeShape EntityType="HotelModel.InternalOrder" Width="1.5" PointX="8" PointY="4.625" />
+        <EntityTypeShape EntityType="HotelModel.Occupation" Width="1.5" PointX="10.125" PointY="0.75" />
+        <EntityTypeShape EntityType="HotelModel.OrderType" Width="1.5" PointX="10.125" PointY="5.375" />
+        <EntityTypeShape EntityType="HotelModel.Room" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="HotelModel.Service" Width="1.5" PointX="5.25" PointY="6.375" />
+        <EntityTypeShape EntityType="HotelModel.Supply" Width="1.5" PointX="10.125" PointY="3.125" />
+        <AssociationConnector Association="HotelModel.FK_dbo_Bills_dbo_Clients_ClientId" />
+        <AssociationConnector Association="HotelModel.FK_dbo_ClientAccommodations_dbo_Clients_ClientId" />
+        <AssociationConnector Association="HotelModel.FK_dbo_ClientAccommodations_dbo_Rooms_RoomId" />
+        <AssociationConnector Association="HotelModel.FK_dbo_ClientServices_dbo_Clients_ClientId" />
+        <AssociationConnector Association="HotelModel.FK_dbo_ClientServices_dbo_Services_ServiceId" />
+        <AssociationConnector Association="HotelModel.FK_dbo_Employees_dbo_Occupations_OccupationId" />
+        <AssociationConnector Association="HotelModel.FK_dbo_InternalOrders_dbo_Employees_AssignedToId" />
+        <AssociationConnector Association="HotelModel.FK_dbo_InternalOrders_dbo_Employees_RequestedById" />
+        <AssociationConnector Association="HotelModel.FK_dbo_Rooms_dbo_Floors_FloorId" />
+        <AssociationConnector Association="HotelModel.FK_dbo_InternalOrders_dbo_OrderTypes_OrderTypeId" />
+        <AssociationConnector Association="HotelModel.FK_dbo_OrderTypes_dbo_Supplies_SupplyId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
