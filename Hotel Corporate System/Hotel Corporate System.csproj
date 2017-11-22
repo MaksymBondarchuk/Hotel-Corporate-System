@@ -198,6 +198,26 @@
     <Compile Include="Migrations\201711212033149_RoomDescription.Designer.cs">
       <DependentUpon>201711212033149_RoomDescription.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711212135558_InitialClients.cs" />
+    <Compile Include="Migrations\201711212135558_InitialClients.Designer.cs">
+      <DependentUpon>201711212135558_InitialClients.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711212138256_InitialClients2.cs" />
+    <Compile Include="Migrations\201711212138256_InitialClients2.Designer.cs">
+      <DependentUpon>201711212138256_InitialClients2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711212153239_InitialClients3.cs" />
+    <Compile Include="Migrations\201711212153239_InitialClients3.Designer.cs">
+      <DependentUpon>201711212153239_InitialClients3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711212154123_InitialClients4.cs" />
+    <Compile Include="Migrations\201711212154123_InitialClients4.Designer.cs">
+      <DependentUpon>201711212154123_InitialClients4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711212156422_InitialClients5.cs" />
+    <Compile Include="Migrations\201711212156422_InitialClients5.Designer.cs">
+      <DependentUpon>201711212156422_InitialClients5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Bill.cs" />
     <Compile Include="Models\Client.cs" />
@@ -309,6 +329,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711212033149_RoomDescription.resx">
       <DependentUpon>201711212033149_RoomDescription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711212135558_InitialClients.resx">
+      <DependentUpon>201711212135558_InitialClients.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711212138256_InitialClients2.resx">
+      <DependentUpon>201711212138256_InitialClients2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711212153239_InitialClients3.resx">
+      <DependentUpon>201711212153239_InitialClients3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711212154123_InitialClients4.resx">
+      <DependentUpon>201711212154123_InitialClients4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711212156422_InitialClients5.resx">
+      <DependentUpon>201711212156422_InitialClients5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
