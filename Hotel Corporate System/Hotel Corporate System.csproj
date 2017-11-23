@@ -192,9 +192,9 @@
     <Compile Include="InternalOrder.cs">
       <DependentUpon>HotelModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711230855239_ClientAccommodationDatesUpdated.cs" />
-    <Compile Include="Migrations\201711230855239_ClientAccommodationDatesUpdated.Designer.cs">
-      <DependentUpon>201711230855239_ClientAccommodationDatesUpdated.cs</DependentUpon>
+    <Compile Include="Migrations\201711222144188_RoomRequiredFields.cs" />
+    <Compile Include="Migrations\201711222144188_RoomRequiredFields.Designer.cs">
+      <DependentUpon>201711222144188_RoomRequiredFields.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Bill.cs" />
@@ -311,8 +311,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711230855239_ClientAccommodationDatesUpdated.resx">
-      <DependentUpon>201711230855239_ClientAccommodationDatesUpdated.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711222144188_RoomRequiredFields.resx">
+      <DependentUpon>201711222144188_RoomRequiredFields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

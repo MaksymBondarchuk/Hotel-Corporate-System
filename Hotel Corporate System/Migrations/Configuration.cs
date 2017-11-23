@@ -55,7 +55,7 @@ namespace Hotel_Corporate_System.Migrations
 				);
 
 			context.ClientAccommodations.AddOrUpdate(ca => ca.Id,
-				new Models.ClientAccommodation { Id = Guid.Parse("20000000-D121-4CF2-A6B2-911E33DD65C5"),  }
+				new Models.ClientAccommodation { Id = Guid.Parse("20000000-D121-4CF2-A6B2-911E33DD65C5"), Begin = new DateTime(2017, 11, 20)}
 				);
 
 			context.SaveChanges();
