@@ -16,10 +16,10 @@ namespace Hotel_Corporate_System
     {
         public System.Guid Id { get; set; }
         public bool IsBooking { get; set; }
-        public System.DateTime Begin { get; set; }
-        public System.DateTime End { get; set; }
         public System.Guid ClientId { get; set; }
         public System.Guid RoomId { get; set; }
+        public System.DateTime From { get; set; }
+        public System.DateTime To { get; set; }
     
         public virtual Client Client { get; set; }
         public virtual Room Room { get; set; }

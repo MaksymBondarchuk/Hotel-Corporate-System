@@ -19,10 +19,10 @@
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="IsBooking" Type="bit" Nullable="false" />
-          <Property Name="Begin" Type="datetime" Nullable="false" />
-          <Property Name="End" Type="datetime" Nullable="false" />
           <Property Name="ClientId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="RoomId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="From" Type="datetime" Nullable="false" />
+          <Property Name="To" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Clients">
           <Key>
@@ -400,12 +400,12 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="IsBooking" Type="Boolean" Nullable="false" />
-          <Property Name="Begin" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="End" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ClientId" Type="Guid" Nullable="false" />
           <Property Name="RoomId" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Client" Relationship="HotelModel.FK_dbo_ClientAccommodations_dbo_Clients_ClientId" FromRole="ClientAccommodation" ToRole="Client" />
           <NavigationProperty Name="Room" Relationship="HotelModel.FK_dbo_ClientAccommodations_dbo_Rooms_RoomId" FromRole="ClientAccommodation" ToRole="Room" />
+          <Property Name="From" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="To" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -685,10 +685,10 @@
           <EntitySetMapping Name="ClientAccommodations">
             <EntityTypeMapping TypeName="HotelModel.ClientAccommodation">
               <MappingFragment StoreEntitySet="ClientAccommodations">
+                <ScalarProperty Name="To" ColumnName="To" />
+                <ScalarProperty Name="From" ColumnName="From" />
                 <ScalarProperty Name="RoomId" ColumnName="RoomId" />
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="End" ColumnName="End" />
-                <ScalarProperty Name="Begin" ColumnName="Begin" />
                 <ScalarProperty Name="IsBooking" ColumnName="IsBooking" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

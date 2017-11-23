@@ -192,6 +192,10 @@
     <Compile Include="InternalOrder.cs">
       <DependentUpon>HotelModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711230855239_ClientAccommodationDatesUpdated.cs" />
+    <Compile Include="Migrations\201711230855239_ClientAccommodationDatesUpdated.Designer.cs">
+      <DependentUpon>201711230855239_ClientAccommodationDatesUpdated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Bill.cs" />
     <Compile Include="Models\Client.cs" />
@@ -305,6 +309,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201711230855239_ClientAccommodationDatesUpdated.resx">
+      <DependentUpon>201711230855239_ClientAccommodationDatesUpdated.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
