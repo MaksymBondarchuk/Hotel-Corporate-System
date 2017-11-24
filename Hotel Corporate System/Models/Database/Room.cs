@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Hotel_Corporate_System.Models
+namespace Hotel_Corporate_System.Models.Database
 {
     public class Room
     {

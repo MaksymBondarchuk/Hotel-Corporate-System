@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 
-namespace Hotel_Corporate_System.Models
+namespace Hotel_Corporate_System.Models.Database
 {
     public class HotelContext : DbContext
     {

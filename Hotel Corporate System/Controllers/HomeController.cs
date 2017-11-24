@@ -26,5 +26,37 @@ namespace Hotel_Corporate_System.Controllers
 
             return View();
         }
+
+        public ActionResult Login()
+        {
+            ViewBag.Message = "Login to the system";
+
+            return View();
+        }
+
+		public ActionResult Porter()
+        {
+            return View();
+        }
+
+		public ActionResult FrontOffice()
+        {
+            return View();
+        }
+
+		public ActionResult BackOffice()
+        {
+            return View();
+        }
+
+		public ActionResult Director()
+        {
+            return View();
+        }
+
+		public ActionResult Accountant()
+        {
+            return View();
+        }
     }
 }

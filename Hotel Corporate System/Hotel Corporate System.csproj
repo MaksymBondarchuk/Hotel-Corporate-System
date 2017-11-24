@@ -197,19 +197,21 @@
       <DependentUpon>201711222144188_RoomRequiredFields.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Bill.cs" />
-    <Compile Include="Models\Client.cs" />
-    <Compile Include="Models\ClientAccommodation.cs" />
-    <Compile Include="Models\ClientService.cs" />
-    <Compile Include="Models\Employee.cs" />
-    <Compile Include="Models\Floor.cs" />
-    <Compile Include="Models\HotelContext.cs" />
-    <Compile Include="Models\InternalOrder.cs" />
-    <Compile Include="Models\Occupation.cs" />
-    <Compile Include="Models\OrderType.cs" />
-    <Compile Include="Models\Room.cs" />
-    <Compile Include="Models\Service.cs" />
-    <Compile Include="Models\Supply.cs" />
+    <Compile Include="Models\BusinessLogic\ClientsAccommodationsHelper.cs" />
+    <Compile Include="Models\BusinessLogic\ServicesHelper.cs" />
+    <Compile Include="Models\Database\Bill.cs" />
+    <Compile Include="Models\Database\Client.cs" />
+    <Compile Include="Models\Database\ClientAccommodation.cs" />
+    <Compile Include="Models\Database\ClientService.cs" />
+    <Compile Include="Models\Database\Employee.cs" />
+    <Compile Include="Models\Database\Floor.cs" />
+    <Compile Include="Models\Database\HotelContext.cs" />
+    <Compile Include="Models\Database\InternalOrder.cs" />
+    <Compile Include="Models\Database\Occupation.cs" />
+    <Compile Include="Models\Database\OrderType.cs" />
+    <Compile Include="Models\Database\Room.cs" />
+    <Compile Include="Models\Database\Service.cs" />
+    <Compile Include="Models\Database\Supply.cs" />
     <Compile Include="Occupation.cs">
       <DependentUpon>HotelModel.tt</DependentUpon>
     </Compile>
@@ -300,6 +302,13 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Porter.cshtml" />
+    <Content Include="Views\Home\Director.cshtml" />
+    <Content Include="Views\Home\FrontOffice.cshtml" />
+    <Content Include="Views\Home\BackOffice.cshtml" />
+    <Content Include="Views\Home\Accountant.cshtml" />
+    <Content Include="Views\Home\Marketing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

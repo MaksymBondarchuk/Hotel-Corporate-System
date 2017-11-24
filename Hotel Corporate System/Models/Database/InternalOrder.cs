@@ -1,9 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity;
 
-namespace Hotel_Corporate_System.Models
+namespace Hotel_Corporate_System.Models.Database
 {
     public class InternalOrder
     {

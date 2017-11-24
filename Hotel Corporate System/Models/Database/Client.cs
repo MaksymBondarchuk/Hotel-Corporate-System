@@ -1,22 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
-namespace Hotel_Corporate_System.Models
+namespace Hotel_Corporate_System.Models.Database
 {
-    public class Employee
+    public class Client
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         public string Name { get; set; }
-
-
-        public Guid OccupationId { get; set; }
-        public Occupation Occupation { get; set; }
+        public DateTime Birth { get; set; }
+        public bool IsVip { get; set; }
     }
 }
