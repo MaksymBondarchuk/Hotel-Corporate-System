@@ -20,13 +20,21 @@ namespace Hotel_Corporate_System.Controllers
 
         public SignInManager<IdentityUser, string> SignInManager
         {
-            get => _signInManager ?? HttpContext.GetOwinContext().Get<SignInManager<IdentityUser, string>>();
+            get => _signInManager;// ?? HttpContext.GetOwinContext().Get<SignInManager<IdentityUser, string>>();
             private set => _signInManager = value;
         }
 
         // GET: Login
         [AllowAnonymous]
         public ActionResult Index(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
+        // GET: Login/Login
+        [AllowAnonymous]
+        public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
@@ -50,14 +58,25 @@ namespace Hotel_Corporate_System.Controllers
                 case SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
-                    return View("Lockout");
+                    //return View("Lockout");
                 case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    //return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
+                {
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
+                }
             }
+        }
+
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }

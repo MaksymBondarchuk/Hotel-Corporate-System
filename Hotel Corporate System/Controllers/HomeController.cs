@@ -8,11 +8,13 @@ namespace Hotel_Corporate_System.Controllers
 {
     public class HomeController : Controller
     {
+        [Authorize]
         public ActionResult Index()
         {
             return View();
         }
 
+        [Authorize]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -20,6 +22,7 @@ namespace Hotel_Corporate_System.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
@@ -27,6 +30,7 @@ namespace Hotel_Corporate_System.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult Login()
         {
             ViewBag.Message = "Login to the system";
@@ -34,27 +38,32 @@ namespace Hotel_Corporate_System.Controllers
             return View();
         }
 
-		public ActionResult Porter()
+        [Authorize]
+        public ActionResult Porter()
         {
             return View();
         }
 
-		public ActionResult FrontOffice()
+        [Authorize]
+        public ActionResult FrontOffice()
         {
             return View();
         }
 
-		public ActionResult BackOffice()
+        [Authorize]
+        public ActionResult BackOffice()
         {
             return View();
         }
 
-		public ActionResult Director()
+        [Authorize]
+        public ActionResult Director()
         {
             return View();
         }
 
-		public ActionResult Accountant()
+        [Authorize]
+        public ActionResult Accountant()
         {
             return View();
         }

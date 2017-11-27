@@ -337,6 +337,7 @@
     <Content Include="Views\Home\Accountant.cshtml" />
     <Content Include="Views\Home\Marketing.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
