@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Hotel_Corporate_System.Models;
+using Hotel_Corporate_System.Models.Helpers;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 
@@ -75,27 +76,25 @@ namespace Hotel_Corporate_System.Controllers
 			//}
 
 
-			//if (!ModelState.IsValid)
-			//{
-			//	return View(model);
-			//}
+			if (!ModelState.IsValid)
+			{
+				return View(model);
+			}
 
-			//User user = new User() { Email = model.Email, Password = model.Password };
+			var employee = LoginHelper.GetEmployee(model.Login, model.Password);
 
-			//user = Repository.GetUserDetails(user);
+			if (employee != null)
+			{
+				FormsAuthentication.SetAuthCookie(model.Login, false);
 
-			//if (user != null)
-			//{
-			//	FormsAuthentication.SetAuthCookie(model.Email, false);
+				var authTicket = new FormsAuthenticationTicket(1, model.Login, DateTime.Now, DateTime.Now.AddMinutes(20), false, model.Login);
+				string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
+				var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+				HttpContext.Response.Cookies.Add(authCookie);
+				return RedirectToAction("Index", "Home");
+			}
 
-			//	var authTicket = new FormsAuthenticationTicket(1, user.Email, DateTime.Now, DateTime.Now.AddMinutes(20), false, user.Roles);
-			//	string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
-			//	var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
-			//	HttpContext.Response.Cookies.Add(authCookie);
-			//	return RedirectToAction("Index", "Home");
-			//}
-
-			ModelState.AddModelError("", "Invalid login attempt.");
+			ModelState.AddModelError("", "Invalid login attempt");
 			return View(model);
 		}
 

@@ -246,6 +246,7 @@
     <Compile Include="Models\Database\Room.cs" />
     <Compile Include="Models\Database\Service.cs" />
     <Compile Include="Models\Database\Supply.cs" />
+    <Compile Include="Models\Helpers\LoginHelper.cs" />
     <Compile Include="Models\Helpers\SecurityHelper.cs" />
     <Compile Include="Occupation.cs">
       <DependentUpon>HotelModel.tt</DependentUpon>
