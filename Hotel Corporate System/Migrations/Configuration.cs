@@ -45,19 +45,31 @@ namespace Hotel_Corporate_System.Migrations
 
 			context.Rooms.AddOrUpdate(f => f.Id,
 				new Models.Database.Room { Id = Guid.Parse("10000000-D121-4CF2-A6B2-911E33DD65C5"), Class = 1, Number = "101", Beds = 1, Cost = 250, FloorId = Guid.Parse("00000000-D121-4CF2-A6B2-911E33DD65C5") },
-				new Models.Database.Room { Id = Guid.Parse("10000000-D121-4CF2-A6B2-911E33DD65C5"), Class = 2, Number = "102", Beds = 2, Cost = 180, FloorId = Guid.Parse("00000000-D121-4CF2-A6B2-911E33DD65C5") },
-				new Models.Database.Room { Id = Guid.Parse("10000000-D121-4CF2-A6B2-911E33DD65C5"), Class = 1, Number = "103", Beds = 1, Cost = 250, FloorId = Guid.Parse("00000000-D121-4CF2-A6B2-911E33DD65C5") },
-				new Models.Database.Room { Id = Guid.Parse("10000001-D121-4CF2-A6B2-911E33DD65C5"), Class = 1, Number = "201", Beds = 1, Cost = 350, FloorId = Guid.Parse("00000001-D121-4CF2-A6B2-911E33DD65C5") },
-				new Models.Database.Room { Id = Guid.Parse("10000001-D121-4CF2-A6B2-911E33DD65C5"), Class = 3, Number = "202", Beds = 1, Cost = 130, FloorId = Guid.Parse("00000001-D121-4CF2-A6B2-911E33DD65C5") },
-				new Models.Database.Room { Id = Guid.Parse("10000001-D121-4CF2-A6B2-911E33DD65C5"), Class = 1, Number = "203", Beds = 3, Cost = 250, FloorId = Guid.Parse("00000001-D121-4CF2-A6B2-911E33DD65C5") },
-				new Models.Database.Room { Id = Guid.Parse("10000002-D121-4CF2-A6B2-911E33DD65C5"), Class = 1, Number = "301", Beds = 1, Cost = 250, FloorId = Guid.Parse("00000002-D121-4CF2-A6B2-911E33DD65C5") },
-				new Models.Database.Room { Id = Guid.Parse("10000002-D121-4CF2-A6B2-911E33DD65C5"), Class = 2, Number = "302", Beds = 1, Cost = 250, FloorId = Guid.Parse("00000002-D121-4CF2-A6B2-911E33DD65C5") },
-				new Models.Database.Room { Id = Guid.Parse("10000002-D121-4CF2-A6B2-911E33DD65C5"), Class = 1, Number = "303", Beds = 1, Cost = 250, FloorId = Guid.Parse("00000002-D121-4CF2-A6B2-911E33DD65C5") }
+				new Models.Database.Room { Id = Guid.Parse("10000001-D121-4CF2-A6B2-911E33DD65C5"), Class = 2, Number = "102", Beds = 2, Cost = 180, FloorId = Guid.Parse("00000000-D121-4CF2-A6B2-911E33DD65C5") },
+				new Models.Database.Room { Id = Guid.Parse("10000002-D121-4CF2-A6B2-911E33DD65C5"), Class = 1, Number = "103", Beds = 1, Cost = 250, FloorId = Guid.Parse("00000000-D121-4CF2-A6B2-911E33DD65C5") },
+				new Models.Database.Room { Id = Guid.Parse("10000003-D121-4CF2-A6B2-911E33DD65C5"), Class = 1, Number = "201", Beds = 1, Cost = 350, FloorId = Guid.Parse("00000001-D121-4CF2-A6B2-911E33DD65C5") },
+				new Models.Database.Room { Id = Guid.Parse("10000004-D121-4CF2-A6B2-911E33DD65C5"), Class = 3, Number = "202", Beds = 1, Cost = 130, FloorId = Guid.Parse("00000001-D121-4CF2-A6B2-911E33DD65C5") },
+				new Models.Database.Room { Id = Guid.Parse("10000005-D121-4CF2-A6B2-911E33DD65C5"), Class = 1, Number = "203", Beds = 3, Cost = 250, FloorId = Guid.Parse("00000001-D121-4CF2-A6B2-911E33DD65C5") },
+				new Models.Database.Room { Id = Guid.Parse("10000006-D121-4CF2-A6B2-911E33DD65C5"), Class = 1, Number = "301", Beds = 1, Cost = 250, FloorId = Guid.Parse("00000002-D121-4CF2-A6B2-911E33DD65C5") },
+				new Models.Database.Room { Id = Guid.Parse("10000007-D121-4CF2-A6B2-911E33DD65C5"), Class = 2, Number = "302", Beds = 1, Cost = 250, FloorId = Guid.Parse("00000002-D121-4CF2-A6B2-911E33DD65C5") },
+				new Models.Database.Room { Id = Guid.Parse("10000008-D121-4CF2-A6B2-911E33DD65C5"), Class = 1, Number = "303", Beds = 1, Cost = 250, FloorId = Guid.Parse("00000002-D121-4CF2-A6B2-911E33DD65C5") }
 				);
 
 			//context.ClientAccommodations.AddOrUpdate(ca => ca.Id,
 			//	new Models.ClientAccommodation { Id = Guid.Parse("20000000-D121-4CF2-A6B2-911E33DD65C5"), Begin = new DateTime(2017, 11, 20)}
 			//	);
+
+			context.Occupations.AddOrUpdate(o => o.Id,
+				new Models.Database.Occupation { Id = Guid.Parse("30000000-D121-4CF2-A6B2-911E33DD65C5"), Name = "Porter", IsFrontOffice = true, IsBackOffice = false, Salary = 3000 },
+				new Models.Database.Occupation { Id = Guid.Parse("30000001-D121-4CF2-A6B2-911E33DD65C5"), Name = "Director", IsFrontOffice = false, IsBackOffice = true, Salary = 8000 },
+				new Models.Database.Occupation { Id = Guid.Parse("30000002-D121-4CF2-A6B2-911E33DD65C5"), Name = "Front Office", IsFrontOffice = true, IsBackOffice = false, Salary = 1500 },
+				new Models.Database.Occupation { Id = Guid.Parse("30000003-D121-4CF2-A6B2-911E33DD65C5"), Name = "Back Office", IsFrontOffice = false, IsBackOffice = true, Salary = 1800 }
+			);
+
+			context.Employees.AddOrUpdate(e => e.Id,
+				new Models.Database.Employee { Id = Guid.Parse("40000000-D121-4CF2-A6B2-911E33DD65C5"), Name = "Abraham Lincoln", Password = "Abraham Lincoln", OccupationId = Guid.Parse("30000000-D121-4CF2-A6B2-911E33DD65C5") },
+				new Models.Database.Employee { Id = Guid.Parse("40000001-D121-4CF2-A6B2-911E33DD65C5"), Name = "George Washington", Password = "George Washington", OccupationId = Guid.Parse("30000001-D121-4CF2-A6B2-911E33DD65C5") }
+			);
 
 			context.SaveChanges();
 		}

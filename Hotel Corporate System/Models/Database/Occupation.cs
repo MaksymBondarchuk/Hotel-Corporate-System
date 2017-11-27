@@ -13,5 +13,6 @@ namespace Hotel_Corporate_System.Models.Database
 		public string Name { get; set; }
 		public decimal Salary { get; set; }
 		public bool IsFrontOffice { get; set; }
+		public bool IsBackOffice { get; set; }
 	}
 }
