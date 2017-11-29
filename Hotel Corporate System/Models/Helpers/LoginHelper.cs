@@ -8,10 +8,11 @@ namespace Hotel_Corporate_System.Models.Helpers
 	{
 		public static Database.Employee GetEmployee(string login, string password)
 		{
+			var encryptedPassword = SecurityHelper.Encrypt(password);
 			using (var context = new HotelContext())
 			{
 				return context.Employees.SingleOrDefault(e => e.Name.Equals(login, StringComparison.InvariantCultureIgnoreCase)
-															  && e.Password.Equals(SecurityHelper.Encrypt(password)));
+															  && e.Password.Equals(encryptedPassword));
 			}
 		}
 	}
