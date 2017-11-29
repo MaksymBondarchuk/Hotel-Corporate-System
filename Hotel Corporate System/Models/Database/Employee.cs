@@ -13,9 +13,10 @@ namespace Hotel_Corporate_System.Models.Database
         public string Name { get; set; }
 
 
-        public Guid OccupationId { get; set; }
-        public Occupation Occupation { get; set; }
+        //public Guid OccupationId { get; set; }
+        //public Occupation Occupation { get; set; }
 
 	    public string Password { get; set; }
+	    public string Roles { get; set; }
 	}
 }

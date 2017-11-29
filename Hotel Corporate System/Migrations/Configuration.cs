@@ -21,7 +21,7 @@ namespace Hotel_Corporate_System.Migrations
 			//  You can use the DbSet<T>.AddOrUpdate() helper extension method 
 			//  to avoid creating duplicate seed data.
 
-			context.Clients.AddOrUpdate(c => c.Id,
+			context.Clients.AddOrUpdate(c => c.Name,
 				new Models.Database.Client { Id = Guid.Parse("E9C2AF99-068A-4E79-9D95-17B1C318E153"), Name = "Joe Biden", Birth = new DateTime(1942, 11, 20), IsVip = false },
 				new Models.Database.Client { Id = Guid.Parse("CEDAF0F5-7328-47CE-8DF2-3D6DD3DCE83D"), Name = "Barack Obama", Birth = new DateTime(1961, 08, 04), IsVip = false },
 				new Models.Database.Client { Id = Guid.Parse("37E62D04-4304-4B21-B089-52B644D6E05C"), Name = "Donald Trump", Birth = new DateTime(1946, 06, 14), IsVip = true },
@@ -59,16 +59,16 @@ namespace Hotel_Corporate_System.Migrations
 			//	new Models.ClientAccommodation { Id = Guid.Parse("20000000-D121-4CF2-A6B2-911E33DD65C5"), Begin = new DateTime(2017, 11, 20)}
 			//	);
 
-			context.Occupations.AddOrUpdate(o => o.Id,
-				new Models.Database.Occupation { Id = Guid.Parse("30000000-D121-4CF2-A6B2-911E33DD65C5"), Name = "Porter", IsFrontOffice = true, IsBackOffice = false, Salary = 3000 },
-				new Models.Database.Occupation { Id = Guid.Parse("30000001-D121-4CF2-A6B2-911E33DD65C5"), Name = "Director", IsFrontOffice = false, IsBackOffice = true, Salary = 8000 },
-				new Models.Database.Occupation { Id = Guid.Parse("30000002-D121-4CF2-A6B2-911E33DD65C5"), Name = "Front Office", IsFrontOffice = true, IsBackOffice = false, Salary = 1500 },
-				new Models.Database.Occupation { Id = Guid.Parse("30000003-D121-4CF2-A6B2-911E33DD65C5"), Name = "Back Office", IsFrontOffice = false, IsBackOffice = true, Salary = 1800 }
+			context.Occupations.AddOrUpdate(o => o.Name,
+				new Models.Database.Occupation { Name = "Porter", IsFrontOffice = true, IsBackOffice = false, Salary = 3000 },
+				new Models.Database.Occupation { Name = "Director", IsFrontOffice = false, IsBackOffice = true, Salary = 8000 },
+				new Models.Database.Occupation { Name = "Front Office", IsFrontOffice = true, IsBackOffice = false, Salary = 1500 },
+				new Models.Database.Occupation { Name = "Back Office", IsFrontOffice = false, IsBackOffice = true, Salary = 1800 }
 			);
 
-			context.Employees.AddOrUpdate(e => e.Id,
-				new Models.Database.Employee { Id = Guid.Parse("40000000-D121-4CF2-A6B2-911E33DD65C5"), Name = "Abraham Lincoln", Password = "Abraham Lincoln", OccupationId = Guid.Parse("30000000-D121-4CF2-A6B2-911E33DD65C5") },
-				new Models.Database.Employee { Id = Guid.Parse("40000001-D121-4CF2-A6B2-911E33DD65C5"), Name = "George Washington", Password = "George Washington", OccupationId = Guid.Parse("30000001-D121-4CF2-A6B2-911E33DD65C5") }
+			context.Employees.AddOrUpdate(e => e.Name,
+				new Models.Database.Employee { Name = "Abraham Lincoln", Password = "Abraham Lincoln", Roles = "Porter"},
+				new Models.Database.Employee { Name = "George Washington", Password = "George Washington", Roles = "Director"}
 			);
 
 			context.SaveChanges();

@@ -87,7 +87,7 @@ namespace Hotel_Corporate_System.Controllers
 			{
 				FormsAuthentication.SetAuthCookie(model.Login, false);
 
-				var authTicket = new FormsAuthenticationTicket(1, model.Login, DateTime.Now, DateTime.Now.AddMinutes(20), false, model.Login);
+				var authTicket = new FormsAuthenticationTicket(1, model.Login, DateTime.Now, DateTime.Now.AddMinutes(20), false, employee.Roles);
 				string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
 				var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
 				HttpContext.Response.Cookies.Add(authCookie);

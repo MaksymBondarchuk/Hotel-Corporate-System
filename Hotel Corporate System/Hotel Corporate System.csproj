@@ -229,6 +229,10 @@
     <Compile Include="Migrations\201711271254299_IsBackOffice-for-Employee.Designer.cs">
       <DependentUpon>201711271254299_IsBackOffice-for-Employee.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711290915213_Added-Roles-for-Employee.cs" />
+    <Compile Include="Migrations\201711290915213_Added-Roles-for-Employee.Designer.cs">
+      <DependentUpon>201711290915213_Added-Roles-for-Employee.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BusinessLogic\ClientsAccommodationsHelper.cs" />
@@ -367,6 +371,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711271254299_IsBackOffice-for-Employee.resx">
       <DependentUpon>201711271254299_IsBackOffice-for-Employee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711290915213_Added-Roles-for-Employee.resx">
+      <DependentUpon>201711290915213_Added-Roles-for-Employee.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
