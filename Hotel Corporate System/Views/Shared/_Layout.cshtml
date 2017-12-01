@@ -1,42 +1,71 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewBag.Title - My ASP.NET Application</title>
+	@Styles.Render("~/Content/css")
+	@Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				@Html.ActionLink("Hotel", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li>@Html.ActionLink("Home", "Index", "Home")</li>
+					<li>@Html.ActionLink("About", "About", "Home")</li>
+					<li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+					<li>@Html.ActionLink("Contact", "Contact", "Home")
+					<li>
+						<div class="dropdown">
+							<button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+								Actions
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li><a href="#">Check in Client</a></li>
+								<li><a href="#">Check out Client</a></li>
+								<li><a href="#">Handle Order in Restaurant</a></li>
+								<li><a href="#">Handle Execution Order</a></li>
+								<li class="divider"></li>
+								<li><a href="#">See Free Rooms</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Generate Sold Hotel Rooms Report</a></li>
+								<li><a href="#">Generate Total Income From Hotel Rooms Report</a></li>
+								<li><a href="#">Generate Total Income From Services Report</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Generate Hotel Capacity Report</a></li>
+								<li><a href="#">Generate Checkins and Checkouts Report</a></li>
+								<li><a href="#">Generate Bookings Report</a></li>
+								<li><a href="#">Generate VIP-clients Report</a></li>
+								<li><a href="#">Generate Front-office Employees Report</a></li>
+								<li><a href="#">Generate Back-office Employees Report</a></li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+		</div>
+	</div>
+	<div class="container body-content">
+		@RenderBody()
+		<hr />
+		<footer>
+			<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+		</footer>
+	</div>
+
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/bootstrap")
+	@RenderSection("scripts", required: false)
 </body>
 </html>

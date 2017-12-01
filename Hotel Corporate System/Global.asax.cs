@@ -30,6 +30,5 @@ namespace Hotel_Corporate_System
 			    }
 		    }
 	    }
-
 	}
 }
