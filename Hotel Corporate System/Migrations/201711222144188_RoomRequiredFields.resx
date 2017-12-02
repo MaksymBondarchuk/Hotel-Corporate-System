@@ -126,4 +126,7 @@
   <data name="DefaultSchema" xml:space="preserve">
     <value>dbo</value>
   </data>
+  <data name="LoginController_Login_Invalid_login_attempt" xml:space="preserve">
+    <value>Invalid login attempt</value>
+  </data>
 </root>
