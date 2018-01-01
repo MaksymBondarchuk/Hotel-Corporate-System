@@ -51,3 +51,8 @@ textarea {
 .offset-m {
     margin: 10px;
 }
+
+.filter-panel {
+    background: buttonface;
+    align-items: center;
+}

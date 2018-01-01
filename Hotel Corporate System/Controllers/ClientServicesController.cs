@@ -15,9 +15,23 @@ namespace Hotel_Corporate_System.Controllers
         private HotelContext db = new HotelContext();
 
         // GET: ClientServices
-        public ActionResult Index()
+        public ActionResult Index(Guid? serviceId, Guid? clientId)
         {
+            ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name");
+            ViewBag.ServiceId = new SelectList(db.Services, "Id", "Name");
+
             var clientServices = db.ClientServices.Include(c => c.Bill).Include(c => c.Client).Include(c => c.Service);
+
+            if (serviceId != null)
+            {
+                clientServices = clientServices.Where(cs => cs.ServiceId == serviceId);
+            }
+
+            if (clientId != null)
+            {
+                clientServices = clientServices.Where(cs => cs.ClientId == clientId);
+            }
+
             return View(clientServices.ToList());
         }
 
