@@ -11,8 +11,5 @@ namespace Hotel_Corporate_System.Models.Database
         public Guid Id { get; set; }
 
         public decimal Amount { get; set; }
-
-        public Guid ClientId { get; set; }
-        public Client Client { get; set; }
     }
 }

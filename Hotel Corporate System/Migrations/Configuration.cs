@@ -29,13 +29,13 @@ namespace Hotel_Corporate_System.Migrations
 				new Models.Database.Client { Id = Guid.Parse("0987B881-DC0C-4C58-895A-AB8438D55912"), Name = "Bernie Sanders", Birth = new DateTime(1941, 09, 08), IsVip = false }
 				);
 
-			context.Bills.AddOrUpdate(b => b.Id,
-				new Models.Database.Bill { Id = Guid.Parse("A2884587-D121-4CF2-A6B2-911E33DD65C5"), Amount = 100, ClientId = Guid.Parse("37E62D04-4304-4B21-B089-52B644D6E05C") },
-				new Models.Database.Bill { Id = Guid.Parse("0EF63CB9-E548-4C73-A1FE-38835A5893B0"), Amount = 360, ClientId = Guid.Parse("37E62D04-4304-4B21-B089-52B644D6E05C") },
-				new Models.Database.Bill { Id = Guid.Parse("D86E1B04-38D7-4255-B33B-D34902C4B5AE"), Amount = 666, ClientId = Guid.Parse("5C1BB475-F10C-4756-B87A-97E67FCFB261") },
-				new Models.Database.Bill { Id = Guid.Parse("906CCD55-D12A-4EA2-896C-A8E96E702867"), Amount = 50, ClientId = Guid.Parse("E9C2AF99-068A-4E79-9D95-17B1C318E153") },
-				new Models.Database.Bill { Id = Guid.Parse("24F87F34-219A-4001-A396-338CE7C030AE"), Amount = 1500, ClientId = Guid.Parse("0987B881-DC0C-4C58-895A-AB8438D55912") }
-				);
+			//context.Bills.AddOrUpdate(b => b.Id,
+			//	new Models.Database.Bill { Id = Guid.Parse("A2884587-D121-4CF2-A6B2-911E33DD65C5"), Amount = 100, ClientId = Guid.Parse("37E62D04-4304-4B21-B089-52B644D6E05C") },
+			//	new Models.Database.Bill { Id = Guid.Parse("0EF63CB9-E548-4C73-A1FE-38835A5893B0"), Amount = 360, ClientId = Guid.Parse("37E62D04-4304-4B21-B089-52B644D6E05C") },
+			//	new Models.Database.Bill { Id = Guid.Parse("D86E1B04-38D7-4255-B33B-D34902C4B5AE"), Amount = 666, ClientId = Guid.Parse("5C1BB475-F10C-4756-B87A-97E67FCFB261") },
+			//	new Models.Database.Bill { Id = Guid.Parse("906CCD55-D12A-4EA2-896C-A8E96E702867"), Amount = 50, ClientId = Guid.Parse("E9C2AF99-068A-4E79-9D95-17B1C318E153") },
+			//	new Models.Database.Bill { Id = Guid.Parse("24F87F34-219A-4001-A396-338CE7C030AE"), Amount = 1500, ClientId = Guid.Parse("0987B881-DC0C-4C58-895A-AB8438D55912") }
+			//	);
 
 			context.Floors.AddOrUpdate(f => f.Id,
 				new Models.Database.Floor { Id = Guid.Parse("00000000-D121-4CF2-A6B2-911E33DD65C5"), Number = 1 },

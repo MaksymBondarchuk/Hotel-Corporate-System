@@ -21,5 +21,9 @@ namespace Hotel_Corporate_System.Models.Database
 
         public Guid RoomId { get; set; }
         public Room Room { get; set; }
+
+        [Display(Name = "Bill")]
+        public Guid? BillId { get; set; }
+        public Bill Bill { get; set; }
     }
 }

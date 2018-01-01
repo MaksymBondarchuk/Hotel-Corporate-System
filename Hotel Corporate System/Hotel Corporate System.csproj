@@ -199,6 +199,14 @@
     <Compile Include="Migrations\201711290915213_Added-Roles-for-Employee.Designer.cs">
       <DependentUpon>201711290915213_Added-Roles-for-Employee.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801011214306_Updated-ClientService-Bill.cs" />
+    <Compile Include="Migrations\201801011214306_Updated-ClientService-Bill.Designer.cs">
+      <DependentUpon>201801011214306_Updated-ClientService-Bill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801011215472_Updated-ClientAccommodation.cs" />
+    <Compile Include="Migrations\201801011215472_Updated-ClientAccommodation.Designer.cs">
+      <DependentUpon>201801011215472_Updated-ClientAccommodation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BusinessLogic\ClientsAccommodationsHelper.cs" />
@@ -317,6 +325,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711290915213_Added-Roles-for-Employee.resx">
       <DependentUpon>201711290915213_Added-Roles-for-Employee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801011214306_Updated-ClientService-Bill.resx">
+      <DependentUpon>201801011214306_Updated-ClientService-Bill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801011215472_Updated-ClientAccommodation.resx">
+      <DependentUpon>201801011215472_Updated-ClientAccommodation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
