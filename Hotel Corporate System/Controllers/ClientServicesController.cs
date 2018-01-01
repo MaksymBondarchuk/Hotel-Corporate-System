@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Hotel_Corporate_System.Models.Database;
 
@@ -12,15 +9,15 @@ namespace Hotel_Corporate_System.Controllers
 {
     public class ClientServicesController : Controller
     {
-        private HotelContext db = new HotelContext();
+        private readonly HotelContext _db = new HotelContext();
 
         // GET: ClientServices
         public ActionResult Index(Guid? serviceId, Guid? clientId)
         {
-            ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name");
-            ViewBag.ServiceId = new SelectList(db.Services, "Id", "Name");
+            ViewBag.ClientId = new SelectList(_db.Clients, "Id", "Name");
+            ViewBag.ServiceId = new SelectList(_db.Services, "Id", "Name");
 
-            var clientServices = db.ClientServices.Include(c => c.Bill).Include(c => c.Client).Include(c => c.Service);
+            var clientServices = _db.ClientServices.Include(c => c.Bill).Include(c => c.Client).Include(c => c.Service);
 
             if (serviceId != null)
             {
@@ -42,14 +39,14 @@ namespace Hotel_Corporate_System.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ClientService clientService = db.ClientServices.Find(id);
+            ClientService clientService = _db.ClientServices.Find(id);
             if (clientService == null)
             {
                 return HttpNotFound();
             }
-            var service = db.Services.Find(clientService.ServiceId);
+            var service = _db.Services.Find(clientService.ServiceId);
             clientService.Service = service;
-            var client = db.Clients.Find(clientService.ClientId);
+            var client = _db.Clients.Find(clientService.ClientId);
             clientService.Client = client;
             return View(clientService);
         }
@@ -57,8 +54,8 @@ namespace Hotel_Corporate_System.Controllers
         // GET: ClientServices/Create
         public ActionResult Create()
         {
-            ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name");
-            ViewBag.ServiceId = new SelectList(db.Services, "Id", "Name");
+            ViewBag.ClientId = new SelectList(_db.Clients, "Id", "Name");
+            ViewBag.ServiceId = new SelectList(_db.Services, "Id", "Name");
             return View();
         }
 
@@ -73,16 +70,16 @@ namespace Hotel_Corporate_System.Controllers
             {
                 clientService.Id = Guid.NewGuid();
                 var bill = new Bill { Amount = clientService.ActualAmount };
-                db.Bills.Add(bill);
+                _db.Bills.Add(bill);
 
                 clientService.BillId = bill.Id;
-                db.ClientServices.Add(clientService);
-                db.SaveChanges();
+                _db.ClientServices.Add(clientService);
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name", clientService.ClientId);
-            ViewBag.ServiceId = new SelectList(db.Services, "Id", "Name", clientService.ServiceId);
+            ViewBag.ClientId = new SelectList(_db.Clients, "Id", "Name", clientService.ClientId);
+            ViewBag.ServiceId = new SelectList(_db.Services, "Id", "Name", clientService.ServiceId);
             return View(clientService);
         }
 
@@ -93,14 +90,14 @@ namespace Hotel_Corporate_System.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ClientService clientService = db.ClientServices.Find(id);
+            ClientService clientService = _db.ClientServices.Find(id);
             if (clientService == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.BillId = new SelectList(db.Bills, "Id", "Id", clientService.BillId);
-            ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name", clientService.ClientId);
-            ViewBag.ServiceId = new SelectList(db.Services, "Id", "Name", clientService.ServiceId);
+            ViewBag.BillId = new SelectList(_db.Bills, "Id", "Id", clientService.BillId);
+            ViewBag.ClientId = new SelectList(_db.Clients, "Id", "Name", clientService.ClientId);
+            ViewBag.ServiceId = new SelectList(_db.Services, "Id", "Name", clientService.ServiceId);
             return View(clientService);
         }
 
@@ -113,13 +110,13 @@ namespace Hotel_Corporate_System.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(clientService).State = EntityState.Modified;
-                db.SaveChanges();
+                _db.Entry(clientService).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.BillId = new SelectList(db.Bills, "Id", "Id", clientService.BillId);
-            ViewBag.ClientId = new SelectList(db.Clients, "Id", "Name", clientService.ClientId);
-            ViewBag.ServiceId = new SelectList(db.Services, "Id", "Name", clientService.ServiceId);
+            ViewBag.BillId = new SelectList(_db.Bills, "Id", "Id", clientService.BillId);
+            ViewBag.ClientId = new SelectList(_db.Clients, "Id", "Name", clientService.ClientId);
+            ViewBag.ServiceId = new SelectList(_db.Services, "Id", "Name", clientService.ServiceId);
             return View(clientService);
         }
 
@@ -130,7 +127,7 @@ namespace Hotel_Corporate_System.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ClientService clientService = db.ClientServices.Find(id);
+            ClientService clientService = _db.ClientServices.Find(id);
             if (clientService == null)
             {
                 return HttpNotFound();
@@ -143,9 +140,9 @@ namespace Hotel_Corporate_System.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            ClientService clientService = db.ClientServices.Find(id);
-            db.ClientServices.Remove(clientService);
-            db.SaveChanges();
+            ClientService clientService = _db.ClientServices.Find(id);
+            _db.ClientServices.Remove(clientService ?? throw new InvalidOperationException());
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -153,7 +150,7 @@ namespace Hotel_Corporate_System.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }
