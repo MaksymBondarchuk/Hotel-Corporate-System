@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Hotel_Corporate_System.Models.Database;
 
@@ -21,77 +17,7 @@ namespace Hotel_Corporate_System.Controllers
         }
 
         // GET: Bills/Details/5
-        public ActionResult Details(Guid? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Bill bill = db.Bills.Find(id);
-            if (bill == null)
-            {
-                return HttpNotFound();
-            }
-            return View(bill);
-        }
-
-        // GET: Bills/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Bills/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Amount")] Bill bill)
-        {
-            if (ModelState.IsValid)
-            {
-                bill.Id = Guid.NewGuid();
-                db.Bills.Add(bill);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(bill);
-        }
-
-        // GET: Bills/Edit/5
-        public ActionResult Edit(Guid? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Bill bill = db.Bills.Find(id);
-            if (bill == null)
-            {
-                return HttpNotFound();
-            }
-            return View(bill);
-        }
-
-        // POST: Bills/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Amount")] Bill bill)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(bill).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(bill);
-        }
-
-        // GET: Bills/Delete/5
-        public ActionResult Delete(Guid? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {

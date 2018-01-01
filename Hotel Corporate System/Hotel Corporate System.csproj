@@ -178,35 +178,20 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BillsController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\ClientServicesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711222144188_RoomRequiredFields.cs" />
-    <Compile Include="Migrations\201711222144188_RoomRequiredFields.Designer.cs">
-      <DependentUpon>201711222144188_RoomRequiredFields.cs</DependentUpon>
+    <Compile Include="Migrations\201801011258439_All-New.cs" />
+    <Compile Include="Migrations\201801011258439_All-New.Designer.cs">
+      <DependentUpon>201801011258439_All-New.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711271243324_Password-for-Employee.cs" />
-    <Compile Include="Migrations\201711271243324_Password-for-Employee.Designer.cs">
-      <DependentUpon>201711271243324_Password-for-Employee.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711271254299_IsBackOffice-for-Employee.cs" />
-    <Compile Include="Migrations\201711271254299_IsBackOffice-for-Employee.Designer.cs">
-      <DependentUpon>201711271254299_IsBackOffice-for-Employee.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711290915213_Added-Roles-for-Employee.cs" />
-    <Compile Include="Migrations\201711290915213_Added-Roles-for-Employee.Designer.cs">
-      <DependentUpon>201711290915213_Added-Roles-for-Employee.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801011214306_Updated-ClientService-Bill.cs" />
-    <Compile Include="Migrations\201801011214306_Updated-ClientService-Bill.Designer.cs">
-      <DependentUpon>201801011214306_Updated-ClientService-Bill.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801011215472_Updated-ClientAccommodation.cs" />
-    <Compile Include="Migrations\201801011215472_Updated-ClientAccommodation.Designer.cs">
-      <DependentUpon>201801011215472_Updated-ClientAccommodation.cs</DependentUpon>
+    <Compile Include="Migrations\201801011302406_Bill-CreatedOn.cs" />
+    <Compile Include="Migrations\201801011302406_Bill-CreatedOn.Designer.cs">
+      <DependentUpon>201801011302406_Bill-CreatedOn.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -304,11 +289,13 @@
     <Content Include="Views\Services\Details.cshtml" />
     <Content Include="Views\Services\Edit.cshtml" />
     <Content Include="Views\Services\Index.cshtml" />
-    <Content Include="Views\Bills\Create.cshtml" />
-    <Content Include="Views\Bills\Delete.cshtml" />
     <Content Include="Views\Bills\Details.cshtml" />
-    <Content Include="Views\Bills\Edit.cshtml" />
     <Content Include="Views\Bills\Index.cshtml" />
+    <Content Include="Views\ClientServices\Create.cshtml" />
+    <Content Include="Views\ClientServices\Delete.cshtml" />
+    <Content Include="Views\ClientServices\Details.cshtml" />
+    <Content Include="Views\ClientServices\Edit.cshtml" />
+    <Content Include="Views\ClientServices\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -320,23 +307,11 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711222144188_RoomRequiredFields.resx">
-      <DependentUpon>201711222144188_RoomRequiredFields.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801011258439_All-New.resx">
+      <DependentUpon>201801011258439_All-New.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711271243324_Password-for-Employee.resx">
-      <DependentUpon>201711271243324_Password-for-Employee.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711271254299_IsBackOffice-for-Employee.resx">
-      <DependentUpon>201711271254299_IsBackOffice-for-Employee.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711290915213_Added-Roles-for-Employee.resx">
-      <DependentUpon>201711290915213_Added-Roles-for-Employee.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801011214306_Updated-ClientService-Bill.resx">
-      <DependentUpon>201801011214306_Updated-ClientService-Bill.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801011215472_Updated-ClientAccommodation.resx">
-      <DependentUpon>201801011215472_Updated-ClientAccommodation.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801011302406_Bill-CreatedOn.resx">
+      <DependentUpon>201801011302406_Bill-CreatedOn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

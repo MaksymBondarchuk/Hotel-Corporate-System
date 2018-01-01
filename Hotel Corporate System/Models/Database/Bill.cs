@@ -8,7 +8,10 @@ namespace Hotel_Corporate_System.Models.Database
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
+
+        [Display(Name = "Created On")]
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
 
         public decimal Amount { get; set; }
     }

@@ -1,9 +1,8 @@
+using System.Data.Entity.Migrations;
+
 namespace Hotel_Corporate_System.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
-    public partial class InitialClients : DbMigration
+    public partial class BillCreatedOn : DbMigration
     {
         public override void Up()
         {
